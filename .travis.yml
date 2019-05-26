@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true robzilla3000/docker-react npm run test -- --watchAll=false
+
+  deploy:
+    provider: elasticbeanstalk
+    region: us-east-1
+    app: "docker-react"
+    env: "Docker-env"
+    bucket_name: 
+    bucket_path: 
+    on:
+      branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+      secure: "$AWS_SECRET_KEY"
